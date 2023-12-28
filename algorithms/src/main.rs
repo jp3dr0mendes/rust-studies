@@ -1,4 +1,4 @@
-use rand::Rng;
+// use rand::Rng;
 
 //buble sort
 //insertion sort
@@ -9,5 +9,9 @@ use rand::Rng;
 //linear search
 
 fn main() {
+
+    let a:[[i32;2];5] = [[0,0];5];
+
+    println!("{a[0]}");
     println!("Hello, world!");
 }
