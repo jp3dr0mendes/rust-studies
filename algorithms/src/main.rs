@@ -1,9 +1,9 @@
 use rand::Rng;
-use std::io;
+// use std::io;
 
 // buble sort - OK
-// insertion sort
-// selection sort
+// insertion sort - OK
+// selection sort - OK
 // merge sort
 // quick sort
 // binary search - OK
@@ -11,6 +11,15 @@ use std::io;
 // busca ternaria
 // busca exponencial
 // busca interpolada
+
+fn validation_sort(array: [usize;10]) -> bool{
+    for i in 1..array.len(){
+        if array[i] < array[i-1]{
+            return false;
+        }
+    } 
+    return true;
+} //validando se o array realmente está ordenado
 
 fn buble_sort(mut array: [usize;10]) -> [usize;10] {
     let mut aux: [usize;2] = [0;2];
@@ -33,6 +42,64 @@ fn buble_sort(mut array: [usize;10]) -> [usize;10] {
     return array;
 }
 
+fn insertion_sort(mut array: [usize;10]) -> [usize;10]{
+    let mut aux_array: [usize;2] = [0;2];
+    
+    for i in 1..array.len(){
+
+        if i-1 == 0{
+            if array[i] < array[i-1]{
+
+                aux_array = [array[i], array[i-1]];
+                array[i-1] = aux_array[0];
+                array[i] = aux_array[1];
+
+            }
+        } else {
+
+            for j in (1..i+1).rev(){ //garantindo que pegue até o ultimo elemento do array, visto que para antes do ultimo 
+                //garantindo que pegue ate o primeiro elemento
+                if array[j] < array[j-1]{
+
+                    aux_array = [array[j], array[j-1]];
+                    array[j-1] = aux_array[0];
+                    array[j] = aux_array[1];
+
+                }
+            }
+        }
+    }
+
+    return array;
+}
+
+fn selection_sort(mut array: [usize;10]) -> [usize;10]{
+    let mut aux: [usize;2] = [0;2];
+
+    for i in 0..array.len(){
+
+        let mut min: usize = array[i];
+        let mut index: usize = 0;
+
+        aux = [array[i],array[i]];
+
+        for j in i..array.len(){
+
+            if array[j] < min{
+                min = array[j];
+                aux[1] = min;
+                index = j;
+                println!("aux: {:?}", aux);
+            }
+        }
+
+        if index != 0 {
+            array[i] = aux[1];
+            array[index] = aux[0];
+        }
+    }
+    return array;
+}
 
 fn binary_search(array: [usize;10], number: usize) -> (bool, usize){
 
@@ -40,9 +107,12 @@ fn binary_search(array: [usize;10], number: usize) -> (bool, usize){
     let mut pivo: usize = (array.len()-1)/2;
 
     if array[pivo] == number{
+
         on_array = true;
         return (on_array, pivo);
+
     } else {
+
         while pivo != 0 && pivo != array.len()-1 {
 
             if number > array[pivo]{
@@ -72,7 +142,7 @@ fn linear_search(array: [usize;10], number: usize) -> (bool, usize) {
 fn main() {
         let list_size: usize = 10;
         let mut array:  [usize;10] = [0;10];
-        let mut num: String = String::new();
+        // let mut num: String = String::new();
     
         for i in 0..list_size {
             array[i] = rand::thread_rng().gen_range(0..=100);
@@ -80,22 +150,23 @@ fn main() {
     
         println!("O array resultante eh {:?}", array);
     
-        let order_array: [usize;10] = buble_sort(array);
+        let order_array: [usize;10] = selection_sort(array);
 
         println!("Order array: {:?}", order_array);
-        println!("Type a number you'd like to search on array:");
+        
+        // println!("Type a number you'd like to search on array:");
 
-        io::stdin().read_line(&mut num).expect("Error on reading element!");
+        // io::stdin().read_line(&mut num).expect("Error on reading element!");
 
-        let num:usize = num.trim().parse().expect("Please type a number!");
-        let result: (bool, usize) = linear_search(order_array, num);
+        // let num:usize = num.trim().parse().expect("Please type a number!");
+        // let result: (bool, usize) = linear_search(order_array, num);
         // let result: (bool, usize) = binary_search(order_array, num);
 
         // println!("result: {}", result.0);
 
-        if result.0 {
-            println!("The number {num} is on index {}", result.1);
-        } else {
-            println!("Error on find the number on array!");
-        }
+        // if result.0 {
+        //     println!("The number {num} is on index {}", result.1);
+        // } else {
+        //     println!("Error on find the number on array!");
+        // }
     }
