@@ -1,13 +1,16 @@
 use rand::Rng;
 use std::io;
 
-//buble sort - OK
-//insertion sort
-//selection sort
-//merge sort
-//quick sort
-//binary search
-//linear search
+// buble sort - OK
+// insertion sort
+// selection sort
+// merge sort
+// quick sort
+// binary search - OK
+// linear search - OK
+// busca ternaria
+// busca exponencial
+// busca interpolada
 
 fn buble_sort(mut array: [usize;10]) -> [usize;10] {
     let mut aux: [usize;2] = [0;2];
@@ -29,6 +32,7 @@ fn buble_sort(mut array: [usize;10]) -> [usize;10] {
 
     return array;
 }
+
 
 fn binary_search(array: [usize;10], number: usize) -> (bool, usize){
 
@@ -56,6 +60,15 @@ fn binary_search(array: [usize;10], number: usize) -> (bool, usize){
     }
 }
 
+fn linear_search(array: [usize;10], number: usize) -> (bool, usize) {
+    for i in 0..array.len()-1{
+        if array[i] == number{
+            return (true, i);
+        }
+    }
+    return (false, 0);
+}
+
 fn main() {
         let list_size: usize = 10;
         let mut array:  [usize;10] = [0;10];
@@ -75,9 +88,10 @@ fn main() {
         io::stdin().read_line(&mut num).expect("Error on reading element!");
 
         let num:usize = num.trim().parse().expect("Please type a number!");
-        let result: (bool, usize) = binary_search(order_array, num);
+        let result: (bool, usize) = linear_search(order_array, num);
+        // let result: (bool, usize) = binary_search(order_array, num);
 
-        println!("result: {}", result.0);
+        // println!("result: {}", result.0);
 
         if result.0 {
             println!("The number {num} is on index {}", result.1);
