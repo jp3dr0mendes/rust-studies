@@ -5,7 +5,7 @@ use rand::Rng;
 // insertion sort - OK
 // selection sort - OK
 // merge sort
-// quick sort
+// quick sort - IN PROGRESS
 // binary search - OK
 // linear search - OK
 // busca ternaria
@@ -101,6 +101,64 @@ fn selection_sort(mut array: [usize;10]) -> [usize;10]{
     return array;
 }
 
+// fn merge_sort(mut array: [usize;10]) -> [usize;10]{
+//     // let mut array_1: [[usize;1];10] = [[0;1];10];
+//     // let mut array_2: [[usize;2];2] = [[0;2];2];
+//     // let mut array_3: [[usize;3];2] = [[0;3];2];
+//     // let mut array_5: [[usize;5];2] = [[0;5];2];
+
+//     let mut aux: usize = array.len()/2;
+
+//     for i in array.len/2(){
+//         fi 
+//         i += 1;
+//     }    
+
+//     return array;
+
+// }
+
+fn quick_sort(mut array: [usize;10]) -> [usize;10]{
+
+    let mut right: [usize;10] = [0;10];
+    let mut left: [usize;10] = [0;10];
+
+    for i in 0..array.len(){
+
+        let mut index: [usize;2] = [0;2];
+        let aux: usize = array[i];
+
+        for j in i..array.len(){
+            if array[j] >= array[i]{
+                
+                right[index[0]] = array[j];
+                index[0] = index[0] + 1;
+
+            } else if array[j] < array[i]{
+                
+                left[index[1]] = array[j];
+                index[1] = index[1] + 1;
+            
+            }
+        }
+
+        array[left.len()-1] = aux;
+        for j in 0..left.len(){
+            if left[j] != 0 {
+                array[j] = left[j];
+            }
+        }
+
+        for j in (i..right.len()-1).rev(){
+            if right[j] != 0 {
+                array[j] = right[right.len()-1-j];
+            }
+        }
+    }
+
+    return array;    
+}
+
 fn binary_search(array: [usize;10], number: usize) -> (bool, usize){
 
     let mut on_array: bool = false;
@@ -150,7 +208,7 @@ fn main() {
     
         println!("O array resultante eh {:?}", array);
     
-        let order_array: [usize;10] = selection_sort(array);
+        let order_array: [usize;10] = quick_sort(array);
 
         println!("Order array: {:?}", order_array);
         
