@@ -104,8 +104,50 @@ fn selection_sort(mut array: [usize;10]) -> [usize;10]{
 // fn merge_sort(mut array: [usize;10]) -> [usize;10]{
 // }
 
-// fn quick_sort(mut array: [usize;10]) -> [usize;10]{
-// }
+fn quick_sort(mut array: [usize;10]) -> [usize;10]{
+    let mut result: [usize;10] = [0;10];
+
+    for i in (0..array.len()).rev(){
+        let mut left: [usize;10] = [0;10];
+        let mut right: [usize;10] = [0;10];
+
+        let mut aux: [usize;2] = [0, 10]; //[aux left; aux right]
+        let mut index: [usize;2] = [0;2]; //[index left; index right]
+
+        println!("on iteration {i}, element: {}", array[i]);
+
+        for j in 0..i{
+            if array[j] < array[i]{
+                left[index[0]] = array[j];
+                index[0] += 1;
+                aux[0] += 1;
+            } else {
+                right[index[1]] = array[j];
+                index[1] += 1;
+                aux[1] -= 1;
+            }
+
+            println!("right: {:?}; left: {:?}", right, left);
+        }
+
+        array[aux[0]] = array[i];
+
+        for j in 0..aux[0]{
+            array[j] = left[j];
+        }
+
+        let mut count: usize = 0;
+
+        for j in aux[1]..array.len(){
+            array[j] = right[count];
+            count += 1;
+        }
+
+        println!("result: {:?}",array);
+        
+    }
+    return array;
+}
 
 fn binary_search(array: [usize;10], number: usize) -> (bool, usize){
 
@@ -132,6 +174,7 @@ fn binary_search(array: [usize;10], number: usize) -> (bool, usize){
                 return (on_array, pivo);                
             }
         }
+
         return (on_array, pivo);
     }
 }
@@ -156,9 +199,9 @@ fn main() {
     
         println!("O array resultante eh {:?}", array);
     
-        // let order_array: [usize;10] = quick_sort(array);
+        let order_array: [usize;10] = quick_sort(array);
 
-        // println!("Order array: {:?}", order_array);
+        println!("Order array: {:?}", order_array);
         
         // println!("Type a number you'd like to search on array:");
 
