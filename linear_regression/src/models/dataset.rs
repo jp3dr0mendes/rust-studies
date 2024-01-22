@@ -11,7 +11,7 @@ pub mod dataset{
 
         pub fn new(path: &str) -> Self {
             Dataset {
-                itens: Vec::new(),
+                itens: Vec::new(),        
                 path: path.to_string(),
             }
         }
@@ -19,7 +19,9 @@ pub mod dataset{
         pub fn make_dataset(&mut self){
 
             for line in read_to_string(&self.path).unwrap().lines(){
+                
                 let line_content: Vec<String> = line.to_string().split(',').map(|s| s.to_string()).collect();
+                
                 if line_content != vec!["idade", "pressÃ"] {
                     self.itens.push(
                         vec![
