@@ -6,6 +6,6 @@ mod models{
 use crate::models::dataset::dataset::Dataset;
 
 fn main() {
-    let test: Dataset = Dataset::new(  r"C:\Users\joaop\Documents\projects\rust-studies\linear_regression\src\models\dataset.txt");
+    let mut test: Dataset = Dataset::new(r"C:\Users\joaop\Documents\projects\rust-studies\linear_regression\src\models\dataset.txt");
     test.make_dataset();
 }
