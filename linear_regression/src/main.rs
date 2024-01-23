@@ -1,15 +1,10 @@
 mod models{
-    pub mod dataset;
+    pub mod linear_regression;
 }
 
-use crate::models::dataset::dataset::Dataset;
-
+// use crate::models::dataset::dataset::Dataset;
+use crate::models::linear_regression::linear_regression::LinearRegression;
 fn main() {
-    let mut test: Dataset = Dataset::new(r"C:\Users\joaop\Documents\projects\rust-studies\linear_regression\src\models\dataset.txt");
-    test.make_dataset();
+    // let mut test: Dataset = Dataset::new(r"C:\Users\joaop\Documents\projects\rust-studies\linear_regression\src\models\dataset.txt");
 
-    // let a: f32 = 1.5;
-    // let b: f32 = f32::powf(a,2.0);
-
-    // println!("pow of a = {b}");
 }
