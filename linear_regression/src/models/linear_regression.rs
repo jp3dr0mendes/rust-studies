@@ -3,7 +3,7 @@ pub mod linear_regression{
 
     use self::gradient::Gradient;
     use self::dataset::Dataset;
-    struct LinearRegression{
+    pub struct LinearRegression{
         dataset: Dataset,
         cost: f32,
         w0: f32,
@@ -70,7 +70,7 @@ pub mod linear_regression{
                 return ((weight1*x)+weight0);
             }
     
-            fn mse(self, x: Vec<i32>, y: Vec<i32>, weight0: f32, weight1: f32) -> f32{
+            fn mse(&self, x: Vec<i32>, y: Vec<i32>, weight0: f32, weight1: f32) -> f32{
                 let mut cost: f32 = 0.0;
 
                 for i in 0..x.len(){
@@ -99,22 +99,23 @@ pub mod linear_regression{
                 return results;
             }
     
-            pub fn gradient_descent(self: &Gradient, weight0: f32, weight1: f32, x: Vec<i32>, y: Vec<i32>) -> (f32, f32, Vec<f32>){
-                let mut cost: Vec<f32> = Vec::new();
+            pub fn gradient_descent(&mut self, weight0: f32, weight1: f32, x: Vec<i32>, y: Vec<i32>) -> (f32, f32, Vec<f32>){
+                let mut costs: Vec<f32> = Vec::new();
                 let mut weights: (f32, f32) = (0.0, 0.0);
     
                 for i in 0..self.epochs{
-                    weights = self.gradient_step(weight0, weight1, x, y,);
+                    weights = self.gradient_step(weight0, weight1, x.clone(), y.clone(),);
                     
                     // weight0 = new_values.0;
                     // weight1 = new_values.1;
+                    let cost = self.mse(x.clone(), y.clone(), weights.0, weights.1);
+                    // costs.push(self.mse(x, y, weights.0, weights.1));
+                    costs.push(cost);
     
-                    cost.push(self.mse(x, y, weights.0, weights.1));
-    
-                    println!("cost on {i}/{} : {}", self.epochs, cost[i as usize]);
+                    println!("cost on {i}/{} : {}", self.epochs, costs[i as usize]);
                 }
     
-                return (weight0, weight1, cost);
+                return (weight0, weight1, costs);
             }
         }
     }
