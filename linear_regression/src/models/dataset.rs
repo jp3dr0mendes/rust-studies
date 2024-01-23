@@ -1,9 +1,9 @@
 pub mod dataset{
-    // use crate::models::dataset::File;
     use std::fs::read_to_string;
     pub struct Dataset {
-        // itens: Vec<Vec<String>>,
         itens: Vec<Vec<i32>>,
+        data: Vec<i32>,
+        value: Vec<i32>,
         path: String,
     }
 
@@ -13,6 +13,8 @@ pub mod dataset{
             Dataset {
                 itens: Vec::new(),        
                 path: path.to_string(),
+                data: Vec::new(),
+                value: Vec::new(),
             }
         }
 
@@ -32,7 +34,12 @@ pub mod dataset{
                 }
             }
 
-            println!("{:?}", &self.itens);
+            for i in 0..self.itens.len(){
+                self.data.push(self.itens[i][0]);
+                self.value.push(self.itens[i][1]);
+            }
+
+            println!("data: {:?} \n value: {:?}", &self.data, &self.value);
         }
     }
 }
