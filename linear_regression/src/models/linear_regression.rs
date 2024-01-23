@@ -67,14 +67,14 @@ pub mod linear_regression{
     
             fn predict(x: i32, weight0: f32, weight1: f32) -> f32{
                 let x: f32 = x as f32;
-                return ((weight1*x)+weight0);
+                return (weight1*x) + weight0;
             }
     
             fn mse(&self, x: Vec<i32>, y: Vec<i32>, weight0: f32, weight1: f32) -> f32{
                 let mut cost: f32 = 0.0;
 
                 for i in 0..x.len(){
-                    cost += f32::powf((Gradient::predict(x[i], weight0, weight1) - (y[i] as f32)),2.0);
+                    cost += f32::powf(Gradient::predict(x[i], weight0, weight1) - (y[i] as f32),2.0);
                 }
 
                 return cost/(x.len() as f32);
@@ -112,7 +112,7 @@ pub mod linear_regression{
                     // costs.push(self.mse(x, y, weights.0, weights.1));
                     costs.push(cost);
     
-                    println!("cost on {i}/{} : {}", self.epochs, costs[i as usize]);
+                    println!("cost on {i}/{} : {}", self.epochs, cost);
                 }
     
                 return (weight0, weight1, costs);
@@ -162,7 +162,6 @@ pub mod linear_regression{
                     self.value.push(self.itens[i][1]);
                 }
     
-                println!("data: {:?} \n value: {:?}", &self.data, &self.value);
             }
         }
     }

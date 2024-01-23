@@ -9,5 +9,5 @@ fn main() {
     let mut Model: LinearRegression = LinearRegression::new(r"C:\Users\joaop\Documents\projects\rust-studies\linear_regression\src\dataset.txt",
                                                             0.0, 0.0);
 
-    Model.train_model(100, 0.5);
+    Model.train_model(100, 50.0);
 }
