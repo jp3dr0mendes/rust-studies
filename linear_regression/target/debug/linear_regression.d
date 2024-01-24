@@ -1,0 +1,1 @@
+C:\Users\joaop\Documents\projects\rust-studies\linear_regression\target\debug\linear_regression.exe: C:\Users\joaop\Documents\projects\rust-studies\linear_regression\src\main.rs C:\Users\joaop\Documents\projects\rust-studies\linear_regression\src\models\linear_regression.rs
